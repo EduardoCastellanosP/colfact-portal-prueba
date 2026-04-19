@@ -12,7 +12,7 @@ export const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1); 
   
-  // 2. Nuevo estado para saber a quién estamos editando
+  // Nuevo estado para saber a quién estamos editando
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   // Si el usuario busca algo o cambia el filtro, regresamos a la página 1
@@ -22,19 +22,19 @@ export const Dashboard = () => {
 
   const { data: users = [], isLoading } = useUsers(searchTerm, roleFilter, page);
 
-  // 3. Función para abrir el modal en modo "Crear" (limpio)
+  // Función para abrir el modal en modo "Crear" (limpio)
   const handleOpenCreate = () => {
     setSelectedUser(null);
     setIsModalOpen(true);
   };
 
-  // 4. Función para abrir el modal en modo "Editar" (con datos)
+  // Función para abrir el modal en modo "Editar" (con datos)
   const handleOpenEdit = (userToEdit: User) => {
     setSelectedUser(userToEdit);
     setIsModalOpen(true);
   };
 
-  // 5. Función para cerrar y limpiar
+  // Función para cerrar y limpiar
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedUser(null);

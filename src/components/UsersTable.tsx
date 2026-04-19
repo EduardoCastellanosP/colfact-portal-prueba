@@ -1,8 +1,7 @@
 import type { User } from '../types/user';
 import { useDeleteUser } from '../hooks/useUsers';
 import { toast } from 'sonner';
-import {useUpdateUser} from '../hooks/useUsers';
-
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   users: User[];
@@ -12,12 +11,15 @@ interface Props {
 
 export const UsersTable = ({ users, isLoading, onEdit }: Props) => {
     const {mutate: deleteUser} = useDeleteUser();
-    const {mutate: updateUser} = useUpdateUser();
-
+      const queryClient = useQueryClient(); 
     const handleDelete = (id: number, name: string) => {
     if (window.confirm(`¿Estás seguro de que deseas eliminar a ${name}?`)) {
       deleteUser(id, {
-        onSuccess: () => toast.success('Usuario eliminado correctamente'),
+       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['users'] });
+        toast.success('Usuario eliminado correctamente');
+      },
+       
         onError: () => toast.error('No se pudo eliminar al usuario')
       });
     }
@@ -67,14 +69,14 @@ export const UsersTable = ({ users, isLoading, onEdit }: Props) => {
                     </button>
 
 
-                     <td className="grid py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button
-                      onClick={() => onEdit(user)} // <-- Usamos la función de edición pasada por props
-                      className='text-white  bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded' 
-                    >
-                      Editar
-                    </button>
-                  </td>
+                     <div className="grid py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <button
+                        onClick={() => onEdit(user)} // <-- Usamos la función de edición pasada por props
+                        className='text-white  bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded' 
+                      >
+                        Editar
+                      </button>
+                    </div>
 
                     
                   </td>
