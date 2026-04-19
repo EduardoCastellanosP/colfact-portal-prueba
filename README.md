@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Conexus Portal - User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una prueba técnica para el desarrollo de un panel de administración de usuarios (Dashboard). Implementa un ciclo completo de CRUD (Crear, Leer, Actualizar, Eliminar) con persistencia simulada en el navegador, manejo avanzado de estado y validaciones estrictas.
 
-Currently, two official plugins are available:
+## 🚀 Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Gestión de Usuarios (CRUD):** Creación, edición, eliminación y visualización de usuarios.
+- **Autenticación Simulada:** Sistema de Login con protección de rutas privadas y persistencia de sesión.
+- **Manejo de Estado Asíncrono:** Uso de React Query para peticiones, mutaciones y sincronización de caché en tiempo real.
+- **Filtros y Paginación:** Búsqueda en tiempo real por nombre/email y filtrado por roles, junto con paginación integrada.
+- **Validación de Formularios:** Esquemas estrictos de validación utilizando Zod y React Hook Form.
+- **Mock API:** Integración de **Mock Service Worker (MSW)** para interceptar peticiones HTTP y simular un backend completo sin necesidad de levantar bases de datos externas.
 
-## React Compiler
+## 🛠️ Stack Tecnológico
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React 18, TypeScript, Vite.
+- **Estilos:** Tailwind CSS.
+- **Estado y Data Fetching:** @tanstack/react-query.
+- **Formularios:** react-hook-form, @hookform/resolvers/zod, zod.
+- **Enrutamiento:** react-router-dom.
+- **Mocking:** MSW (Mock Service Worker).
+- **UI/Notificaciones:** Sonner.
 
-## Expanding the ESLint configuration
+## 📦 Instrucciones de Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona este repositorio o descomprime el archivo.
+2. Abre una terminal en la carpeta raíz del proyecto.
+3. Instala las dependencias ejecutando:
+   bash
+    npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+4 Inicia el servidor de desarrollo:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  bash 
+  npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5. 🔐 Credenciales de Acceso
+Para ingresar al portal, utiliza las siguientes credenciales de prueba:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Usuario: admin
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Contraseña: Admin123!
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+6. Nota
+En este proyecto monolitico no es necesario levantar ningun servidor backend ya que todo se maneja por medio de MSW.
